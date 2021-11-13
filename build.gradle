@@ -25,6 +25,8 @@ dependencies {
 	implementation 'com.google.guava:guava:30.1.1-jre'
 	implementation("net.dv8tion:JDA:4.3.0_299")
 	implementation 'com.moandjiezana.toml:toml4j:0.7.2'
+	implementation("com.googlecode.json-simple:json-simple:1.1")
+
 }
 
 test {

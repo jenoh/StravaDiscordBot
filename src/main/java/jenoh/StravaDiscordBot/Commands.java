@@ -10,8 +10,7 @@ public class Commands extends ListenerAdapter {
 
         if(args[0].equalsIgnoreCase(StravaDiscordBotApplication.getConfigManager().getToml().getString("bot.prefix") +"info")) {
             event.getChannel().sendTyping().queue();
-            // Envoyer text informatif sur le bot
-            event.getChannel().sendMessage("Oui la farine").queue();
+            event.getChannel().sendMessage("Info WIP").queue();
         }
 
         if(args[0].equalsIgnoreCase(StravaDiscordBotApplication.getConfigManager().getToml().getString("bot.prefix") +"alias")) {
