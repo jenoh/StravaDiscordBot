@@ -26,6 +26,8 @@ dependencies {
 	implementation("net.dv8tion:JDA:4.3.0_299")
 	implementation 'com.moandjiezana.toml:toml4j:0.7.2'
 	implementation("com.googlecode.json-simple:json-simple:1.1")
+	implementation 'com.google.code.gson:gson:2.8.9'
+
 
 }
 
