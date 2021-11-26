@@ -1,7 +1,0 @@
-[bot]
-discordtoken = "ODY5NjYxNTY5OTM4NzY3OTMy.YQBdcw.dhizp0EXfgSgb35R-MhCc1zF1hM"
-prefix = "!"
-[strava]
-stravatoken = "9882f93ca591d85b394da03103ed1a7c7dbd0fa8"
-client_id = "73985"
-client_secret = "46d42aed23269a25caed5cbeaa9a8ea135d8d6cc"

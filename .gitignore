@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 .m2
 .mvn
+config.toml
 ### STS ###
 .apt_generated
 .classpath
