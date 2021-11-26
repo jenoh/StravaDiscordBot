@@ -1,4 +1,4 @@
-package jenoh.StravaDiscordBot.utils;
+package jenoh.strava.bot.utils;
 
 import com.moandjiezana.toml.Toml;
 

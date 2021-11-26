@@ -1,10 +1,10 @@
-package jenoh.StravaDiscordBot;
+package jenoh.strava.bot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StravaDiscordBotApplicationTests {
+class BotApplicationTests {
 
 	@Test
 	void contextLoads() {
