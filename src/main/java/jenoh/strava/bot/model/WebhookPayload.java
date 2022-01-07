@@ -1,4 +1,4 @@
-package jenoh.strava.bot.Class;
+package jenoh.strava.bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,12 +1,17 @@
 package jenoh.strava.bot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jenoh.strava.bot.Class.WebhookPayload;
+import jenoh.strava.bot.model.Athlete;
+import jenoh.strava.bot.model.WebhookPayload;
+import jenoh.strava.bot.repository.AthleteRepository;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -15,22 +20,22 @@ import java.io.IOException;
 public class WebController {
     private final OkHttpClient httpClient = new OkHttpClient();
 
+    @Autowired
+    AthleteRepository athleteRepository;
+
     @GetMapping("/")
     public String home(@RequestParam String code) {
-//        StravaDiscordBotApplication.getConfigManager().getToml().getString("strava.discordtoken");
-        System.out.println(code);
-        // form parameters
+
         FormBody FormBody = new FormBody.Builder()
-                .add("client_id", "73985")
-                .add("client_secret", "46d42aed23269a25caed5cbeaa9a8ea135d8d6cc")
+                .add("client_id", BotApplication.getConfigManager().getToml().getString("strava.client_id"))
+                .add("client_secret", BotApplication.getConfigManager().getToml().getString("strava.client_secret"))
                 .add("code", code)
                 .add("grant_type", "authorization_code")
-
                 .build();
 
+        /* Post the code to receive athlete information */
         Request request = new Request.Builder()
                 .url("https://www.strava.com/oauth/token")
-                .addHeader("User-Agent", "OkHttp Bot")
                 .post(FormBody)
                 .build();
 
@@ -38,9 +43,17 @@ public class WebController {
 
             if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
-            // Get response body
-            System.out.println(response.body().string());
-        } catch (IOException e) {
+            JSONParser parser = new JSONParser();
+            String s = response.body().string();
+            JSONObject athleteJson = (JSONObject) parser.parse(s);
+
+            ObjectMapper mapper = new ObjectMapper();
+            Athlete athlete = mapper.readValue(athleteJson.get("athlete").toString(), Athlete.class);
+
+            /* Store the athlete */
+            athleteRepository.save(athlete);
+
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         return "Hello !";
